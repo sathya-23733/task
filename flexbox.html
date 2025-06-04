@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fruit Learning Dashboard</title>
+  <style>
+    :root {
+      --bg-color: #4fc78f;
+      --topbar-bg: linear-gradient(to right, #0077b6, #00b4d8);
+      --topbar-text: white;
+      --sidebar-bg: linear-gradient(to bottom, #2c9de0, #0077b6);
+      --sidebar-text: #fff;
+      --menu-bg: #1f8ac5;
+      --menu-hover-bg: #156fa4;
+      --main-bg: white;
+      --text-color: #333;
+      --card-bg: linear-gradient(135deg, #a1eafb, #d4fc79);
+      --card-shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode {
+      --bg-color: #f0f8ff;
+      --topbar-bg: linear-gradient(to right, #a3cef1, #79a7d3);
+      --topbar-text: #003554;
+      --sidebar-bg: linear-gradient(to bottom, #8cb4f3, #678dd6);
+      --sidebar-text: #f0f0f0;
+      --menu-bg: #a2c7ff;
+      --menu-hover-bg: #5683d6;
+      --main-bg: #e6f0fa;
+      --text-color: #222;
+      --card-bg: linear-gradient(135deg, #bbd0ff, #d6f0ff);
+      --card-shadow: rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      color: var(--text-color);
+    }
+
+    .topbar {
+      background: var(--topbar-bg);
+      color: var(--topbar-text);
+      padding: 12px 25px;
+      font-weight: bold;
+      text-align: right;
+      font-size: 14px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+      user-select: none;
+    }
+
+    #toggle-theme {
+      background: transparent;
+      border: none;
+      color: var(--topbar-text);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    #toggle-theme:hover {
+      color: #ffd700;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 50px);
+    }
+
+    .sidebar {
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      width: 240px;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .sidebar h2 {
+      margin: 0 0 10px;
+      font-size: 40px;
+    }
+
+    .menu-item {
+      background-color: var(--menu-bg);
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      color: var(--sidebar-text);
+    }
+
+    .menu-item:hover {
+      background-color: var(--menu-hover-bg);
+    }
+
+    .main-content {
+      padding: 30px;
+      overflow-y: auto;
+      flex: 1;
+      background-color: var(--main-bg);
+      transition: background-color 0.4s ease;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 2px 5px var(--card-shadow);
+      padding: 20px;
+      box-sizing: border-box;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: var(--text-color);
+      transform: rotate(-2deg);
+    }
+
+    .card:hover {
+      transform: rotate(0deg) translateY(-7px);
+      box-shadow: 0 6px 15px var(--card-shadow);
+    }
+
+    .card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .main-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .main-content::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    Admin | Logout |
+    <button id="toggle-theme" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">🌓</button>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <h2>Fruits</h2>
+      <div class="menu-item">Dashboard</div>
+      <div class="menu-item">Fruits List</div>
+      <div class="menu-item">Categories</div>
+      <div class="menu-item">Settings</div>
+    </div>
+
+    <div class="main-content">
+      <div class="header">
+        <h1>Eating fruits is like tasting nature’s candy—sweet, vibrant, and bursting with life. 🍏🍒🍍</h1>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <img src="apple.jpg" alt="apple" />
+          <h3>Apple</h3>
+          <p>Apple (Malus domestica) is one of the most popular and widely consumed fruits globally. Known for its crisp texture and sweet to tart flavor, it is not only delicious but also highly nutritious.</p>
+        </div>
+        <div class="card">
+          <img src="mango.jpg" alt="mango" />
+          <h3>Mango</h3>
+          <p>Mango (Mangifera indica) is often called the “King of Fruits”, prized for its rich flavor, juicy texture, and vibrant color. Native to South Asia, it’s now enjoyed worldwide.</p>
+        </div>
+        <div class="card">
+          <img src="orange.jpg" alt="orange" />
+          <h3>Orange</h3>
+          <p>Orange (Citrus sinensis) is a juicy, sweet citrus fruit known for its refreshing flavor and vibrant color. It is one of the most widely grown fruits in the world and a major source of vitamin C.</p>
+        </div>
+        <div class="card">
+          <img src="strawberry.jpg" alt="strawberry" />
+          <h3>Strawberry</h3>
+          <p>Strawberry (Fragaria × ananassa) is a bright red, heart-shaped fruit known for its juicy texture, sweet-tart flavor, and high nutritional value. It’s not only delicious but also a powerhouse of health benefits.</p>
+        </div>
+        <div class="card">
+          <img src="lemon.jpg" alt="lemon" />
+          <h3>Lemon</h3>
+          <p>Lemon (Citrus limon) is a bright yellow citrus fruit known for its sharp, tangy flavor and refreshing aroma. It's widely used both for its culinary and medicinal properties.</p>
+        </div>
+        <div class="card">
+          <img src="watermelon.jpg" alt="watermelon" />
+          <h3>Watermelon</h3>
+          <p>Watermelon (Citrullus lanatus) is a large, juicy fruit with a green rind and sweet, red or pink flesh. It’s a summer favorite, known for its high water content and refreshing taste.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-theme');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      toggleBtn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌓';
+    });
+  </script>
+
+</body>
+</html>
